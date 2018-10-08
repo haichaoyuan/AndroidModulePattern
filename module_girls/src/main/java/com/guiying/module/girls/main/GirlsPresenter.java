@@ -46,6 +46,7 @@ public class GirlsPresenter implements GirlsContract.Presenter {
 
     @Override
     public void start() {
-        getGirls(20, 1, true);
+//        getGirls(20, 1, true);
+        getGirls(1000, 1, true);
     }
 }

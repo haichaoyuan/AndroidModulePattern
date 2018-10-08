@@ -22,6 +22,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <p>类说明</p>
@@ -114,10 +115,16 @@ public class GirlsView extends FrameLayout implements GirlsContract.View, SwipeR
 
     @Override
     public void refresh(List<Girls> data) {
+        //========================== add in 2018/7/4 : 乱序data
         mData.clear();
-        mData.addAll(data);
+        Random random = new Random();
+        for (int i = data.size() -1; i >= 0; i--) {
+            int i1 = random.nextInt(data.size());
+            Girls remove = data.remove(i1);
+            mData.add(remove);
+        }
         mAdapter.clear();
-        mAdapter.addAll(data);
+        mAdapter.addAll(mData);
     }
 
     @Override

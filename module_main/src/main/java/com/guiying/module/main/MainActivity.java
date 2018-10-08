@@ -1,11 +1,15 @@
 package com.guiying.module.main;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.module_sample.ui.impl.ClipPathActivity;
 import com.guiying.module.common.base.BaseActivity;
 import com.guiying.module.common.base.ViewManager;
 import com.guiying.module.common.utils.ToastUtils;
@@ -20,6 +24,7 @@ import com.guiying.module.common.utils.ToastUtils;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private long mExitTime = 0;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.news_button).setOnClickListener(this);
         findViewById(R.id.girls_button).setOnClickListener(this);
         findViewById(R.id.fragment_button).setOnClickListener(this);
+
+        imageView = findViewById(R.id.img);
+        ImageView imageView2 = findViewById(R.id.img2);
+        ImageView imageView3 = findViewById(R.id.img3);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tmp);
+        Bitmap roundedShape = ClipPathActivity.getRoundedShape(bitmap, 10, 0);
+        imageView.setImageBitmap(roundedShape);
+
+        Bitmap roundedShape2 = ClipPathActivity.getRoundShapeByXfermode(bitmap, 10);
+        imageView2.setImageBitmap(roundedShape2);
+
     }
 
     @Override

@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--
+    app:max_visible        最大同时显示几张卡片
+    app:min_adapter_stack  卡片剩余多少张时，开始加载下一页
+    app:rotation_degrees   卡片拖拽中，最大的旋转角度
+    -->
+    <com.zc.swiple.SwipeFlingView
+        android:id="@+id/layout_swipe_fling"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/size_20dp"
+        app:max_visible="4"
+        app:min_adapter_stack="3"
+        app:rotation_degrees="15" />
+</RelativeLayout>
