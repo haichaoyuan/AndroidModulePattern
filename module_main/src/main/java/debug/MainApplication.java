@@ -13,7 +13,6 @@ import com.orhanobut.logger.Logger;
  * @name GirlsApplication
  */
 public class MainApplication extends BaseApplication {
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -25,6 +24,7 @@ public class MainApplication extends BaseApplication {
      * 这样就能够在组件请求接口了
      */
     private void login() {
+
         HttpClient client = new HttpClient.Builder()
                 .baseUrl("http://gank.io/api/data/")
                 .url("福利/10/1")

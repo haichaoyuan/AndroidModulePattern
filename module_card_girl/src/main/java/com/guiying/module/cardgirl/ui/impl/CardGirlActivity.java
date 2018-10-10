@@ -1,24 +1,22 @@
-package com.hc.module.cardgirl.ui.impl;
+package com.guiying.module.cardgirl.ui.impl;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.guiying.module.cardgirl.R;
 import com.guiying.module.common.base.BaseActionBarActivity;
 import com.guiying.module.common.base.BasePresenter;
-import com.hc.module.cardgirl.R;
-import com.hc.module.cardgirl.data.UserAdapter;
-import com.hc.module.cardgirl.data.bean.Girl;
-import com.hc.module.cardgirl.presenter.ICardGirlPresenter;
-import com.hc.module.cardgirl.presenter.impl.CardGirlPresenter;
-import com.hc.module.cardgirl.ui.ICardGirlView;
+import com.guiying.module.cardgirl.ui.impl.data.UserAdapter;
+import com.guiying.module.cardgirl.ui.impl.data.bean.Girl;
+import com.guiying.module.cardgirl.ui.impl.presenter.ICardGirlPresenter;
+import com.guiying.module.cardgirl.ui.impl.presenter.impl.CardGirlPresenter;
+import com.guiying.module.cardgirl.ui.impl.ui.ICardGirlView;
 import com.zc.swiple.SwipeFlingView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Desc: 卡片女孩 的 CardGirlActivity
@@ -29,7 +27,6 @@ import butterknife.ButterKnife;
 @Route(path = "/card_girl/card")
 public class CardGirlActivity extends BaseActionBarActivity implements ICardGirlView, SwipeFlingView.OnItemClickListener {
 
-    @BindView(R.id.layout_swipe_fling)
     SwipeFlingView mLayoutSwipeFling;
     private BasePresenter mPresenter;
 
@@ -43,8 +40,7 @@ public class CardGirlActivity extends BaseActionBarActivity implements ICardGirl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_girl);
-        ButterKnife.bind(this);
-        mLayoutSwipeFling = ButterKnife.findById(this, R.id.layout_swipe_fling);
+        mLayoutSwipeFling = this.findViewById(R.id.layout_swipe_fling);
 
         mPresenter = new CardGirlPresenter(this);
         mPresenter.start();

@@ -69,6 +69,9 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
 
 }
 
@@ -81,6 +84,62 @@ dependencies {
         implementation project(':module_main')
         implementation project(':module_girls')
         implementation project(':module_news')
+        implementation project(':module_card_girl')
     }
 
+}
+
+
+project.ext {
+    projectName = PROJECT_NAME
+    apkRootDir = "output"
+    apkName = PROJECT_NAME+".apk"
+}
+
+def buildDay = new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8"))
+def buildTime = new Date().format("yyyy-MM-dd HH.mm.ss", TimeZone.getTimeZone("GMT+8"))
+
+build {
+    doLast {
+        //当前目录下 ，不加 /
+        def outputFile = new File("module_app/build/outputs/apk/release/module_app-release.apk")
+        def fileP = project.ext.apkRootDir + "/" + buildDay + "/" + project.ext.apkName;
+        def fileP2 = project.ext.apkRootDir + "/" + buildDay + "/" + project.ext.projectName + "/" + buildTime + ".apk";
+        copyToPath(outputFile, fileP)
+        copyToPath(outputFile, fileP2)
+    }
+}
+
+def copyToPath(file, path) {
+    if (file.name.endsWith('.apk')) {
+        def length = 1024;
+        println "start: " + file.name
+        println "path: " + file.getAbsolutePath()
+        if (!file.exists()) {
+            return
+        }
+
+        println "test: " + file.name
+
+        def fin = new FileInputStream(file);
+        def desFile = new File(path);
+        def dir = desFile.getParentFile();
+        if (!dir.exists()) {
+            dir.mkdirs()
+        }
+        def fout = new FileOutputStream(desFile);
+        byte[] buffer = new byte[length];
+        def ins;
+        while (true) {
+            ins = fin.read(buffer);
+            if (ins == -1) {
+                fin.close();
+                fout.flush();
+                fout.close();
+                break;
+            } else {
+                fout.write(buffer, 0, ins);
+            }
+        }
+    }
 }

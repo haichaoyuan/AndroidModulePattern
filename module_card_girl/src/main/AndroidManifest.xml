@@ -1,10 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hc.module.cardgirl">
+    package="com.guiying.module.cardgirl">
 
     <application android:theme="@style/AppTheme">
         <activity
             android:name=".ui.impl.CardGirlActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
     </application>
 
 </manifest>

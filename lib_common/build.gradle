@@ -26,6 +26,9 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -59,11 +62,6 @@ dependencies {
     api deps.permission
     api deps.utils
     api deps.glide
-
-    // addition
-    compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'com.makeramen:roundedimageview:2.2.1'
-    compile 'com.android.support:cardview-v7:23.2.1'
 
     //view
     api deps.photo_view

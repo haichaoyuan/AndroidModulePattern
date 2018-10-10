@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.module_sample.ui.impl.ClipPathActivity;
 import com.guiying.module.common.base.BaseActivity;
 import com.guiying.module.common.base.ViewManager;
 import com.guiying.module.common.utils.ToastUtils;
@@ -33,17 +32,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.news_button).setOnClickListener(this);
         findViewById(R.id.girls_button).setOnClickListener(this);
         findViewById(R.id.fragment_button).setOnClickListener(this);
+        findViewById(R.id.card_girls_button).setOnClickListener(this);
 
         imageView = findViewById(R.id.img);
-        ImageView imageView2 = findViewById(R.id.img2);
-        ImageView imageView3 = findViewById(R.id.img3);
-
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tmp);
-        Bitmap roundedShape = ClipPathActivity.getRoundedShape(bitmap, 10, 0);
-        imageView.setImageBitmap(roundedShape);
-
-        Bitmap roundedShape2 = ClipPathActivity.getRoundShapeByXfermode(bitmap, 10);
-        imageView2.setImageBitmap(roundedShape2);
 
     }
 
@@ -57,6 +48,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             ARouter.getInstance().build("/girls/list").navigation();
         } else if (view.getId() == R.id.fragment_button) {
             startActivity(new Intent(this, BottomNavigationActivity.class));
+        } else if(view.getId() == R.id.card_girls_button){
+            ARouter.getInstance().build("/card_girl/card").navigation();
         }
     }
 
