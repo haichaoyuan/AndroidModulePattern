@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.fragment_button).setOnClickListener(this);
         findViewById(R.id.card_girls_button).setOnClickListener(this);
 
-        imageView = findViewById(R.id.img);
 
     }
 

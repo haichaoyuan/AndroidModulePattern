@@ -1,12 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.guiying.module.cardgirl">
 
     <application android:theme="@style/AppTheme">
         <activity
             android:name=".ui.impl.CardGirlActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.impl.ui.impl.MyWebActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

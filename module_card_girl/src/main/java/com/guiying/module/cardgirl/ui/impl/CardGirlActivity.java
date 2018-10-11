@@ -2,9 +2,11 @@ package com.guiying.module.cardgirl.ui.impl;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.guiying.module.cardgirl.R;
 import com.guiying.module.common.base.BaseActionBarActivity;
 import com.guiying.module.common.base.BasePresenter;
@@ -28,6 +30,7 @@ import java.util.List;
 public class CardGirlActivity extends BaseActionBarActivity implements ICardGirlView, SwipeFlingView.OnItemClickListener {
 
     SwipeFlingView mLayoutSwipeFling;
+    private Button btnShow;
     private BasePresenter mPresenter;
 
 
@@ -41,6 +44,13 @@ public class CardGirlActivity extends BaseActionBarActivity implements ICardGirl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_girl);
         mLayoutSwipeFling = this.findViewById(R.id.layout_swipe_fling);
+        btnShow = this.findViewById(R.id.btn_show);
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build("/card_girl/webview").navigation();
+            }
+        });
 
         mPresenter = new CardGirlPresenter(this);
         mPresenter.start();

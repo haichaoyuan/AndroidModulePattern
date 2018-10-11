@@ -17,4 +17,11 @@
         app:max_visible="4"
         app:min_adapter_stack="3"
         app:rotation_degrees="15" />
+
+    <Button
+        android:id="@+id/btn_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示"
+        />
 </RelativeLayout>
