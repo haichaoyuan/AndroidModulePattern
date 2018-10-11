@@ -42,6 +42,7 @@ public class BaseApplication extends Application {
             delegate.onCreate();
         }
 
+
     }
 
     @Override

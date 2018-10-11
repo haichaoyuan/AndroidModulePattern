@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.guiying.module.cardgirl.R;
+import com.guiying.module.cardgirl.ui.impl.CardGirlAppDelegate;
 import com.guiying.module.cardgirl.ui.impl.presenter.IMyWebPresenter;
 import com.guiying.module.cardgirl.ui.impl.ui.IMyWebView;
 import com.guiying.module.common.base.BaseActionBarActivity;
@@ -43,15 +44,13 @@ public class MyWebActivity extends BaseActionBarActivity implements IMyWebView {
     }
 
     private void initWebView() {
-        if(mWebView == null){
-            mWebView = new WebView(getApplicationContext());
-        } else {
-            ViewParent parent = mWebView.getParent();
-            if(parent != null){
-                RelativeLayout parentLayout = (RelativeLayout) parent;
-                parentLayout.removeAllViews();
-            }
+        mWebView = CardGirlAppDelegate.getInstance(this.getApplicationContext());
+        ViewParent parent = mWebView.getParent();
+        if (parent != null && parent instanceof FrameLayout) {
+            FrameLayout parentLayout = (FrameLayout) parent;
+            parentLayout.removeAllViews();
         }
+
         frameLayout.addView(mWebView);
         mWebView.loadUrl("file:///android_asset/ppt/5281a115ce50f8fd676e56b295aee5e4/index.html");
         mWebView.getSettings().setAppCacheEnabled(true);
@@ -102,6 +101,11 @@ public class MyWebActivity extends BaseActionBarActivity implements IMyWebView {
         mWebView.setOnLongClickListener(v -> true);
     }
 
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        frameLayout.removeAllViews();
+    }
 
     @Override
     protected int setTitleId() {
