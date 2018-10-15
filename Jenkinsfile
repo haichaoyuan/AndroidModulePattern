@@ -1,9 +1,5 @@
 pipeline {
   agent any
-  options {
-          timeout(time: 1, unit: 'HOURS') //一个小时后还没执行完，直接 abort
-          retry(3)//失败后重试
-  }
   stages {
     stage('echoHello') {
       steps {
@@ -22,5 +18,9 @@ pipeline {
 
     }
 
+  }
+  options {
+    timeout(time: 1, unit: 'HOURS')
+    retry(3)
   }
 }
