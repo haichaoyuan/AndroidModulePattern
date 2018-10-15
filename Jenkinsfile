@@ -6,7 +6,7 @@ pipeline {
         sh 'echo \'hello\''
       }
     }
-    stage('cleanBuid') {
+    /*stage('cleanBuid') {
       steps {
         sh './gradlew clean build'
       }
@@ -15,11 +15,11 @@ pipeline {
       steps {
         sh './gradlew check'
       }
-    }
+    }*/
   }
   post {
     always {
-      archiveArtifacts(artifacts: 'build/outputs/apk/**/*.apk', fingerprint: true)
+      archiveArtifacts(artifacts: 'app/build/outputs/apk/release/*.apk', fingerprint: true)
       junit 'build/reports/**/*.xml'
 
     }
