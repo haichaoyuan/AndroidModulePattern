@@ -90,22 +90,20 @@ dependencies {
 }
 
 
+def buildTime = new Date().format("yyyy-MM-dd_HH-mm-ss", TimeZone.getTimeZone("GMT+8"))
+
 project.ext {
     projectName = PROJECT_NAME
     apkRootDir = "output"
-    apkName = PROJECT_NAME+".apk"
+    apkName = PROJECT_NAME + "_"+ buildTime+".apk"
 }
 
-def buildDay = new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8"))
-def buildTime = new Date().format("yyyy-MM-dd HH.mm.ss", TimeZone.getTimeZone("GMT+8"))
 
 build {
     doLast {
         //当前目录下 ，不加 /
         def outputFile = new File("module_app/build/outputs/apk/release/module_app-release.apk")
-        def fileP = project.ext.apkRootDir + "/" + buildDay + "/" + project.ext.apkName;
-        def fileP2 = project.ext.apkRootDir + "/" + buildDay + "/" + project.ext.projectName + "/" + buildTime + ".apk";
-        copyToPath(outputFile, fileP)
+        def fileP2 = project.ext.apkRootDir + "/" + apkName;
         copyToPath(outputFile, fileP2)
     }
 }
@@ -119,6 +117,7 @@ def copyToPath(file, path) {
             return
         }
 
+        println "dest: " + fpath
         println "test: " + file.name
 
         def fin = new FileInputStream(file);
@@ -143,3 +142,4 @@ def copyToPath(file, path) {
         }
     }
 }
+
