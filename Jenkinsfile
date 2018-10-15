@@ -6,16 +6,6 @@ pipeline {
         sh 'echo \'hello\''
       }
     }
-    /*stage('cleanBuid') {
-      steps {
-        sh './gradlew clean build'
-      }
-    }
-    stage('Test') {
-      steps {
-        sh './gradlew check'
-      }
-    }*/
   }
   post {
     always {
