@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+// add pmd
+apply plugin: 'pmd'
+apply plugin: 'jacoco'
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
@@ -71,6 +74,12 @@ android {
 
     lintOptions {
         abortOnError false
+//        warningsAsErrors true
+//        abortOnError true
+//        htmlReport true
+//        //locations**for**the rules and output
+//        lintConfig file("${rootDir}/config/lint/lint-config.xml")
+//        htmlOutput file("${buildDir}/reports/lint/lint.html")
     }
 
 }
@@ -89,6 +98,9 @@ dependencies {
 
 }
 
+// =============================
+// =========== 打包
+// =============================
 
 def buildTime = new Date().format("yyyy-MM-dd_HH-mm-ss", TimeZone.getTimeZone("GMT+8"))
 
@@ -117,7 +129,7 @@ def copyToPath(file, path) {
             return
         }
 
-        println "dest: " + fpath
+        println "dest: " + path
         println "test: " + file.name
 
         def fin = new FileInputStream(file);
@@ -143,3 +155,64 @@ def copyToPath(file, path) {
     }
 }
 
+// =============================
+// =========== pmd 分析
+// =============================
+
+def configDir = "${project.rootDir}/config"
+def reportDir = "${project.buildDir}/reports"
+check.dependsOn 'pmd' // 将pmd 和 check任务关联起来，调用原来的check 就好调用我们的 pmd
+task pmd(type:Pmd, dependsOn:"assembleDebug") {
+    group = "pmd"
+    ignoreFailures = false
+    ruleSetFiles = files("$configDir/pmd/ali-pmd.xml")
+    ruleSets = []
+    source 'src/main/java'
+    include '**/*.java'
+    exclude '**/gen/**'
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "$reportsDir/pmd/pmd.xml"
+        }
+        html {
+            destination "$reportsDir/pmd/pmd.html"
+        }
+    }
+}
+
+// =============================
+// =========== Jacoco 代码覆盖率 分析
+// =============================
+
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+}
+task coverage(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        html.destination "${buildDir}/reports/codecoverage"
+    }
+    def ignoredFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            'android/**/*.*',
+            'com.android/**/*.*',
+            'com.google/**/*.*'
+    ]
+    def debugTree = fileTree(dir:"${project.buildDir}/intermediates/classes/debug", excludes: ignoredFilter)
+    sourceDirectories = files(android.sourceSets.main.java.srcDirs)
+    classDirectories = files([debugTree])
+    additionalSourceDirs = files([
+            "${buildDir}/generated/source/buildConfig/debug",
+            "${buildDir}/generated/source/r/debug"
+    ])
+    executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
+}
