@@ -1,29 +1,39 @@
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Android Application Rules"
-    xmlns="http://pmd.sf.net/ruleset/1.0.0"
-    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
-    xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
+<?xml version="1.0"?>
 
-    <description>Custom ruleset for Android application</description>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="alibaba-pmd"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
-    <exclude-pattern>.*/R.java</exclude-pattern>
-    <exclude-pattern>.*/gen/.*</exclude-pattern>
+    <!--<rule ref="rulesets/java/ali-concurrent.xml"/>-->
 
-    <rule ref="rulesets/java/android.xml" />
-    <rule ref="rulesets/java/clone.xml" />
-    <rule ref="rulesets/java/finalizers.xml" />
-    <rule ref="rulesets/java/imports.xml">
-        <!-- Espresso is designed this way !-->
-        <exclude name="TooManyStaticImports" />
+    <!--<rule ref="rulesets/java/ali-comment.xml"/>-->
+    <rule ref="rulesets/java/xh-comment.xml"/>
+
+    <!--<rule ref="rulesets/java/hc-demo.xml"/>-->
+
+    <!--<rule ref="rulesets/java/ali-naming.xml">-->
+        <!--<exclude name="ArrayNamingShouldHaveBracketRule"/>-->
+    <!--</rule>-->
+    <rule ref="rulesets/java/xh-naming.xml">
     </rule>
-    <rule ref="rulesets/java/logging-java.xml" />
-    <rule ref="rulesets/java/braces.xml" />
-    <rule ref="rulesets/java/strings.xml" />
-    <rule ref="rulesets/java/basic.xml" />
-    <rule ref="rulesets/java/naming.xml">
-        <exclude name="AbstractNaming" />
-        <exclude name="LongVariable" />
-        <exclude name="ShortMethodName" />
-        <exclude name="ShortVariable" />
-        <exclude name="VariableNamingConventions" />
-    </rule>
+
+    <!--<rule ref="rulesets/java/ali-constant.xml">-->
+        <!--<exclude name="UpperEllRule"/>-->
+    <!--</rule>-->
+    <rule ref="rulesets/java/xh-constant.xml"/>
+
+    <!--<rule ref="rulesets/java/ali-other.xml"/>-->
+    <!--<rule ref="rulesets/java/ali-orm.xml"/>-->
+    <!--<rule ref="rulesets/java/ali-exception.xml"/>-->
+
+    <!--<rule ref="rulesets/java/ali-oop.xml">-->
+        <!--<exclude name="EqualsAvoidNullRule"/>-->
+        <!--<exclude name="WrapperTypeEqualityRule"/>-->
+    <!--</rule>-->
+    <rule ref="rulesets/java/xh-oop.xml"/>
+
+    <!--<rule ref="rulesets/java/ali-set.xml"/>-->
+    <!--<rule ref="rulesets/java/ali-flowcontrol.xml">-->
+        <!--<exclude name="NeedBraceRule"/>-->
+    <!--</rule>-->
 </ruleset>
