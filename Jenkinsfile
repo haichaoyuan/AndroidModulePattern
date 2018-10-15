@@ -15,6 +15,7 @@ pipeline {
   post {
     always {
       archiveArtifacts(artifacts: 'module_app/build/outputs/apk/release/*.apk', fingerprint: true)
+
     }
 
   }
