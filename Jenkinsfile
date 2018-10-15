@@ -6,5 +6,10 @@ pipeline {
         sh 'echo \'hello\''
       }
     }
+    stage('cleanBuid') {
+      steps {
+        sh './gradlew clean build'
+      }
+    }
   }
 }
