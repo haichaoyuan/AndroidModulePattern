@@ -15,6 +15,8 @@ pipeline {
   post {
     success {
       archiveArtifacts(artifacts: 'output/*.apk', fingerprint: true)
+
     }
+
   }
 }
