@@ -3,14 +3,30 @@
 buildscript {
     apply from: 'versions.gradle'
     addRepos(repositories)
+    repositories {
+        // 添加库路径，实际项目中原来此处可能还有别的库，在此位置追加。追加库的位置可能会导致项目报错（找不到某些依赖的错误），先插入到最前面不行再往后一行行移动，一个个的试，具体原因还没来得及探究
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
     dependencies {
         /* classpath deps.android_gradle_plugin*/
         classpath deps.android_gradle_plugin
         classpath deps.kotlin.plugin
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        //在此位置追加以下依赖行
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6-rc1")
+
     }
 }
+// [sonar]plugins段放置位置有要示，放在buildscript段前面会报错，放到文件最末尾也报错，紧跟buildscript放置OK，其余位置没有偿试
+plugins {
+    // 添加插件信息
+    id "org.sonarqube" version "2.6-rc1"
+}
+//[sonar]声明插件
+apply plugin: 'org.sonarqube'
 
 allprojects {
     addRepos(repositories)
@@ -35,4 +51,23 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+//[sonar]属性
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+subprojects{
+    sonarqube{
+        properties{
+            property "sonar.sources", "src/main/java"
+            //可保持在 ~/.gradle/gradle.properties
+            property "sonar.host.url", "http://localhost:9000/"
+            property "sonar.login", "admin"
+            property "sonar.password", "admin"
+        }
+    }
 }
