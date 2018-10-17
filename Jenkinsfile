@@ -17,7 +17,7 @@ pipeline {
       archiveArtifacts(artifacts: 'output/*.apk', fingerprint: true)
     }
     always {
-        mail to:"1830560854@qq.com", subject: "打包邮件-$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+        mail to:"1830560854@qq.com", subject: "打包邮件"
     }
 
   }
