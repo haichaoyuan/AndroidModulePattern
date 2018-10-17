@@ -64,10 +64,6 @@ subprojects{
     sonarqube{
         properties{
             property "sonar.sources", "src/main/java"
-            //可保持在 ~/.gradle/gradle.properties
-            property "sonar.host.url", "172.17.0.4:9000"
-            property "sonar.login", "admin"
-            property "sonar.password", "admin"
         }
     }
 }
