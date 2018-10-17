@@ -16,9 +16,5 @@ pipeline {
     success {
       archiveArtifacts(artifacts: 'output/*.apk', fingerprint: true)
     }
-    always {
-        mail to:1830560854@qq.com, subject: "The Pipeline failed"
-    }
-
   }
 }
