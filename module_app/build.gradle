@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 // add pmd
-//apply plugin: 'pmd'
+apply plugin: 'pmd'
 //apply plugin: 'jacoco'
 
 
@@ -159,6 +159,48 @@ def copyToPath(file, path) {
 // =============================
 // =========== pmd 分析
 // =============================
+task pmd(type: Pmd) {
+    ignoreFailures = true
+    source = fileTree('src/main/java')
+//    ruleSetFiles = files("${project.rootDir}/config/pmd/PmdRuleSets.xml")
+    ruleSets = [
+            'java-android','java-basic','java-braces',
+            'java-clone','java-codesize',
+            'java-comments',
+            'java-controversial',
+            'java-coupling',
+            'java-design',
+            'java-empty',
+            'java-finalizers',
+            'java-imports',
+            'java-j2ee',
+            'java-javabeans',
+            'java-junit',
+            'java-logging-jakarta-commons',
+            'java-logging-java',
+            'java-migrating',
+            'java-naming',
+            'java-optimizations',
+            'java-strictexception','java-strings',
+            'java-sunsecure','java-typeresolution',
+            'java-unnecessary','java-unusedcode'
+//
+    ]
+    ruleSets = ["java-android"]
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "${project.buildDir}/reports/pmd/pmd.xml"
+        }
+        html {
+            destination "${project.buildDir}/reports/pmd/pmd.html"
+        }
+//        xml {
+//            destination "build/pmd.xml"
+//        }
+    }
+}
 
 //def configDir = "${project.rootDir}/config"
 //def reportDir = "${project.buildDir}/reports"
