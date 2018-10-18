@@ -186,7 +186,7 @@ task pmd(type: Pmd) {
             'java-unnecessary','java-unusedcode'
 //
     ]
-    ruleSets = ["java-android"]
+//    ruleSets = ["java-android"]
     reports {
         xml.enabled = true
         html.enabled = true
