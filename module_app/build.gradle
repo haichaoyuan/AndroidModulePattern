@@ -220,9 +220,6 @@ task pmd(type: Pmd) {
         html {
             destination "${project.buildDir}/reports/pmd/pmd.html"
         }
-//        xml {
-//            destination "build/pmd.xml"
-//        }
     }
 }
 

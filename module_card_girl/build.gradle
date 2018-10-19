@@ -3,6 +3,7 @@ if (isModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'pmd'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -60,4 +61,59 @@ dependencies {
 //    compile 'com.android.support:cardview-v7:23.2.1'
 
     implementation 'com.github.zhuchen1109:Swipe-cards:18df0b545b'
+    pmd "com.alibaba.p3c:p3c-pmd:$deps.p3c"
+}
+
+// =============================
+// =========== pmd 分析
+// =============================
+
+task pmd(type: Pmd) {
+    ignoreFailures = true
+    source = fileTree('src/main/java')
+//    ruleSetFiles = files("${project.rootDir}/config/pmd/PmdRuleSets.xml")
+    ruleSets = [
+            'java-ali-comment',
+            'java-ali-concurrent',
+            'java-ali-constant',
+            'java-ali-exception',
+            'java-ali-flowcontrol',
+            'java-ali-naming',
+            'java-ali-oop',
+            'java-ali-orm',
+            'java-ali-other',
+            'java-ali-set',
+            'java-android','java-basic','java-braces',
+            'java-clone','java-codesize',
+            'java-comments',
+            'java-controversial',
+            'java-coupling',
+            'java-design',
+            'java-empty',
+            'java-finalizers',
+            'java-imports',
+            'java-j2ee',
+            'java-javabeans',
+            'java-junit',
+            'java-logging-jakarta-commons',
+            'java-logging-java',
+            'java-migrating',
+            'java-naming',
+            'java-optimizations',
+            'java-strictexception','java-strings',
+            'java-sunsecure','java-typeresolution',
+            'java-unnecessary','java-unusedcode'
+
+    ]
+//    ruleSets = ["java-android"]
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "${project.buildDir}/reports/pmd/pmd.xml"
+        }
+        html {
+            destination "${project.buildDir}/reports/pmd/pmd.html"
+        }
+    }
 }
