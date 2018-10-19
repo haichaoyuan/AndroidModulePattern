@@ -85,6 +85,9 @@ android {
 
 }
 
+ext {
+    p3c = "1.3.0"
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.support.multidex
@@ -97,7 +100,17 @@ dependencies {
         implementation project(':module_card_girl')
     }
 
+    pmd "com.alibaba.p3c:p3c-pmd:${p3c}"
 }
+
+//mypmd {
+//    consoleOutput = true
+//    reportsDir = file("build/reports/pmd")
+//
+//    ruleSets = [
+//            "java-ali-comment"
+//    ]
+//}
 
 // =============================
 // =========== 打包
@@ -159,11 +172,22 @@ def copyToPath(file, path) {
 // =============================
 // =========== pmd 分析
 // =============================
+
 task pmd(type: Pmd) {
     ignoreFailures = true
     source = fileTree('src/main/java')
 //    ruleSetFiles = files("${project.rootDir}/config/pmd/PmdRuleSets.xml")
     ruleSets = [
+            'java-ali-comment',
+            'java-ali-concurrent',
+            'java-ali-constant',
+            'java-ali-exception',
+            'java-ali-flowcontrol',
+            'java-ali-naming',
+            'java-ali-oop',
+            'java-ali-orm',
+            'java-ali-other',
+            'java-ali-set',
             'java-android','java-basic','java-braces',
             'java-clone','java-codesize',
             'java-comments',
@@ -184,7 +208,7 @@ task pmd(type: Pmd) {
             'java-strictexception','java-strings',
             'java-sunsecure','java-typeresolution',
             'java-unnecessary','java-unusedcode'
-//
+
     ]
 //    ruleSets = ["java-android"]
     reports {
