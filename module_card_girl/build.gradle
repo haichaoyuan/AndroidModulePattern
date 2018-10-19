@@ -73,7 +73,7 @@ task pmd(type: Pmd) {
     source = fileTree('src/main/java')
 //    ruleSetFiles = files("${project.rootDir}/config/pmd/PmdRuleSets.xml")
     ruleSets = [
-            'java-hc_demo'
+            'java-hc-demo'
 //            'java-ali-comment',
 //            'java-ali-concurrent',
 //            'java-ali-constant',
