@@ -1,6 +1,8 @@
-apply plugin: 'com.android.application'
-//apply plugin: 'jacoco'
-
+if (IS_JENKINS) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'jacoco'
+}
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
@@ -105,7 +107,7 @@ def buildTime = new Date().format("yyyy-MM-dd_HH-mm-ss", TimeZone.getTimeZone("G
 project.ext {
     projectName = PROJECT_NAME
     apkRootDir = "output"
-    apkName = PROJECT_NAME + "_"+ buildTime+".apk"
+    apkName = PROJECT_NAME + "_" + buildTime + ".apk"
 }
 
 
@@ -163,7 +165,7 @@ def copyToPath(file, path) {
 //    source = fileTree('src/main/java')
 ////    ruleSetFiles = files("${project.rootDir}/config/pmd/PmdRuleSets.xml")
 //    ruleSets = [
-            'java-hc-demo'
+'java-hc-demo'
 //            'java-ali-comment',
 //            'java-ali-concurrent',
 //            'java-ali-constant',
@@ -210,11 +212,9 @@ def copyToPath(file, path) {
 //    }
 //}
 
-
 // =============================
 // =========== Jacoco 代码覆盖率 分析
 // =============================
-
 
 //jacoco {
 //    toolVersion = "0.7.5.201505241946"
